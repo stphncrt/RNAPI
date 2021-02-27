@@ -48,7 +48,7 @@ const Main = (props) => {
   return (
     <View>
       <RestaurantCard />
-      <Button title="Get new Restaurant" />
+      {/* <Button title="Get new Restaurant" /> */}
     </View>
   );
 };
