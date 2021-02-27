@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import axios from 'axios';
 
 import Button from './components/Button';
@@ -43,16 +50,42 @@ import RestaurantCard from './components/RestaurantCard';
 //     </View>
 //   );
 // };
+const fetchRestaurant = () => {
+  alert('New data..');
+};
 
 const Main = (props) => {
+  const [isloading, setIsloading] = useState(true);
+  const [restaurantData, setRestaurantData] = useState(null);
+  const fetchRestaurant = async () => {
+    setIsloading(true);
+    const response = await axios.get(
+      'https://random-data-api.com/api/restaurant/random_restaurant',
+    );
+    console.log(response);
+    setRestaurantData(response.data);
+    setIsloading(false);
+  };
+
+  useEffect(() => {
+    fetchRestaurant();
+  }, []);
+
   return (
     <View>
-      <RestaurantCard />
-      {/* <Button title="Get new Restaurant" /> */}
+      {isloading ? (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <RestaurantCard item={restaurantData} />
+      )}
+      <Button
+        title="Get new Restaurant"
+        onNewRequest={() => fetchRestaurant()}
+      />
     </View>
   );
 };
 
 export default Main;
-
-//https://random-data-api.com/api/restaurant/random_restaurant
