@@ -5,17 +5,18 @@ const RestaurantCard = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.type}>Salty Curry</Text>
+        <Text style={styles.type}> {props.item.name}</Text>
       </View>
       <View>
-        <Text style={styles.typeText}>Carrabean</Text>
+        <Text style={styles.typeText}> {props.item.type} </Text>
       </View>
       <Image
         style={{height: Dimensions.get('window').height / 3}}
-        source={{
-          uri: 'https://random-data-api.com/api/restaurant/random_restaurant',
-        }}
+        source={{uri: props.item.logo}}
       />
+      <Text style={styles.desciption}>{props.item.description}</Text>
+
+      <Text style={styles.review}>{props.item.review}</Text>
     </View>
   );
 };
@@ -23,9 +24,7 @@ const RestaurantCard = (props) => {
 export default RestaurantCard;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   header: {
     padding: 10,
     margin: 5,
@@ -34,5 +33,12 @@ const styles = StyleSheet.create({
   },
   typeText: {
     fontSize: 18,
+  },
+  type: {
+    fontSize: 20,
+  },
+  desciption: {
+    alignSelf: 'center',
+    margin: 10,
   },
 });
