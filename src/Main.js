@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {
   View,
+  ScrollView,
   Text,
   FlatList,
   TouchableOpacity,
@@ -72,7 +73,7 @@ const Main = (props) => {
   }, []);
 
   return (
-    <View>
+    <ScrollView>
       {isloading ? (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ActivityIndicator />
@@ -84,7 +85,7 @@ const Main = (props) => {
         title="Get new Restaurant"
         onNewRequest={() => fetchRestaurant()}
       />
-    </View>
+    </ScrollView>
   );
 };
 
